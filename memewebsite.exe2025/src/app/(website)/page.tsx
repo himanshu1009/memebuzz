@@ -122,7 +122,6 @@ export default function Page() {
     axios.post(`${process.env.NEXT_PUBLIC_API_URL}/post/upvote/${id}`, {}, {
       headers: headers
     }).then(() => {
-      toast.success(upvoted ? 'Upvote Removed' : 'Upvoted');
       fetchDataLeader();
       fetchData();
       callback();

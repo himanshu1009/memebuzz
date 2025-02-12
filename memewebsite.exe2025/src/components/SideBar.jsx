@@ -29,8 +29,8 @@ export default function CustomSidebar() {
     <div className="h-screen fixed md:w-1/4 lg:w-1/5 xl:w-1/6  py-7 bg-black text-white flex flex-col items-center justify-between border-r border-gray-800">
       <div className="flex items-center justify-center h-16 bg-black">
         <img src="/exe.png" alt="Logo" className="h-10" />
-        <h1 className='text-xl ml-3 font-bold text-white'>
-           Meme NITH
+        <h1 className='text-3xl ml-3 font-bold text-purple-400'>
+           MemeBuzz
         </h1>
       </div>
       <nav className="flex flex-col  h-fit py-4">
@@ -39,7 +39,7 @@ export default function CustomSidebar() {
             <li key={item.title} className=" 
              mb-8">
               <Link href={item.url} legacyBehavior>
-                <a className="flex  justify-center p-2 rounded hover:bg-gray-700">
+                <a className="flex  justify-center p-2 rounded hover:bg-purple-400">
                   <item.icon className="mr-2" />
                   {item.title}
                 </a>
@@ -50,7 +50,7 @@ export default function CustomSidebar() {
       </nav>
       
 
-      <button onClick={handleLogout} className="flex  justify-center p-2 w-fit rounded hover:bg-gray-700">
+      <button onClick={handleLogout} className="flex  justify-center p-2 w-fit rounded hover:bg-purple-400">
           <LogOut className="mr-2" />
             Log Out
           </button>

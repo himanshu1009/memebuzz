@@ -22,7 +22,7 @@ export default function LeaderboardMobile({ leaders, handleOnClick ,onclose}) {
       <button onClick={onclose} className="absolute top-4 right-4 z-[100] text-white">
         Close
       </button>
-      <h2 className="font-bold  m-2 text-white">Leaderboard</h2>
+      <h2 className="font-extrabold  m-2 text-purple-400"> 🏆 Leaderboard</h2>
       <ul>
         {leaders.map((leader, i) => (
           <li key={i} onClick={() => { handleOnClick(leader._id)

@@ -20,7 +20,7 @@ export default function Leaderboard({ leaders ,handleOnClick}) {
 
   return (
     <div className="bg-black fixed p-4 backdrop-blur-lg h-full  lg:w-1/4  right-0 overflow-y-auto scrollbar-thin no-scrollbar"> 
-      <h2 className="font-bold  m-2 text-white">Leaderboard</h2>
+      <h2 className="font-extrabold  m-2 text-purple-400 text-center">🏆 Leaderboard</h2>
       <ul>
         {leaders.map((leader, i) => (
           <li key={i} onClick={()=>{handleOnClick(leader._id)}} className=" rounded-lg border border-gray-900 m-2 px-5 py-2 flex justify-between items-center text-white">

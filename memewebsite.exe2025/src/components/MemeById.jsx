@@ -12,6 +12,7 @@ function MemeByID({ isopen, memeId, user, handleUpvote, handleComment, onclose }
 
     const [isCommentModalOpen, setIsCommentModalOpen] = useState('');
     const [comment, setComment] = useState("");
+    const[isCommentSubmitting,setIsCommentSubmitting]=useState(false);
     const [Comments, setComments] = useState([]);
     const [isCommentLoading, setIsCommentLoading] = useState(false);
     const [meme, setMeme] = useState(null);
@@ -139,10 +140,12 @@ function MemeByID({ isopen, memeId, user, handleUpvote, handleComment, onclose }
                         <div className="flex justify-between items-center w-full mt-4">
 
                             <input type="text" value={comment} placeholder="Add a comment" className="bg-gray-800 text-white p-2 rounded-lg w-3/4" onChange={(e) => { setComment(e.target.value) }} />
-                            <button onClick={() => {
+                            <button disabled={isCommentSubmitting} onClick={() => {
+                                setIsCommentSubmitting(true)
                                 handleComment(meme._id, comment, () => { fetchComments(meme._id) 
                                 setComment('')
                                 fetchMeme(meme._id)
+                                setIsCommentSubmitting(false)
                                 })
 
                             }} className="bg-[#c084fc] text-white text-lg p-2 rounded-lg w-1/4 ml-2">Post</button>

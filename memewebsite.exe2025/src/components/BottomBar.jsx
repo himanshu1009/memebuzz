@@ -22,7 +22,7 @@ const items = [
 
 export default function BottomBar({ showLeaderboard, setShowLeaderboard }) {
   return (
-    <div className="fixed bottom-0 w-full flex justify-around bg-[#c084fc] text-white p-2">
+    <div className="fixed bottom-0 w-full flex justify-around bg-white text-black p-2">
       {items.map((item) => (
         <Link key={item.title} href={item.url} legacyBehavior>
           <a className="flex items-center justify-center p-2 rounded hover:bg-gray-700">

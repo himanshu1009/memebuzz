@@ -15,6 +15,7 @@ function MemeSection({ showmeme, memes, user, handleUpvote,handleComment }) {
   const [isCommentModalOpen, setIsCommentModalOpen] = useState('');
   const [comment, setComment] = useState("");
   const [Comments, setComments] = useState([]);
+  const [isCommentSubmitting, setIsCommentSubmitting] = useState(false);
   const [isCommentLoading, setIsCommentLoading] = useState(false);
   useEffect(() => {
     axios.get(`${process.env.NEXT_PUBLIC_API_URL}/user/auth`,{
@@ -121,8 +122,11 @@ function MemeSection({ showmeme, memes, user, handleUpvote,handleComment }) {
                   <div className="flex justify-between items-center w-full mt-4">
         
                     <input type="text" value={comment} placeholder="Add a comment" className="bg-gray-800 text-white p-2 rounded-lg w-3/4"  onChange={(e)=>{setComment(e.target.value)}}/>
-                    <button onClick={()=>{handleComment(meme._id,comment,()=>{fetchComments(meme._id)
+                    <button disabled={isCommentSubmitting} onClick={()=>{
+                      setIsCommentSubmitting(true)
+                      handleComment(meme._id,comment,()=>{fetchComments(meme._id)
                       setComment('')
+                      setIsCommentSubmitting(false)
                     })
                       
                     }} className="bg-[#c084fc] text-white text-lg p-2 rounded-lg w-1/4 ml-2">Post</button>
