@@ -7,7 +7,7 @@ import MemeSection from '../../components/MemeSection';
 import { useIsMobile } from '@/hooks/use-mobile';
 import BottomBar from '@/components/BottomBar';
 import toast from 'react-hot-toast';
-import MemeByID from '@/components/MemeByID';
+import MemeByID from '@/components/MemeById';
 import Image from 'next/image';
 import LeaderboardMobile from '@/components/LeaderPageMobile';
 
