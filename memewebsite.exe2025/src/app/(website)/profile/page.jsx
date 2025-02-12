@@ -17,7 +17,7 @@ function truncateString(str, maxLength) {
 }
 
 
-function ProfilePage({leaders,handleOnClick}) {
+function ProfilePage({}) {
   const router = useRouter();
   const [profile, setProfile] = useState({
     name: '',

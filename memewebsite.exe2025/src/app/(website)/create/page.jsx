@@ -9,7 +9,7 @@ import { useIsMobile } from '@/hooks/use-mobile';
 import LeaderboardMobile from '@/components/LeaderPageMobile';
 
 
-function create({leaders}) {
+function create({}) {
   const [caption, setCaption] = useState('');
   const [image, setImage] = useState(null);
   const [title, setTitle] = useState('');

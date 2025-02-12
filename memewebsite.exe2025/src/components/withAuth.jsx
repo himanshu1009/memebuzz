@@ -2,15 +2,10 @@
 
 import { useState, useEffect } from 'react';
 import { isAuthenticated } from '@/lib/utils'; // Your auth check logic
-import { ComponentType } from 'react';
 
-interface AuthenticatedComponentProps {
-    [key: string]: unknown;
-}
-
-const withAuth = <P extends object>(WrappedComponent: ComponentType<P>) => {
-    const AuthenticatedComponent = (props: AuthenticatedComponentProps) => {
-        const [isClient, setIsClient] = useState<boolean>(false); // To track if it's on client-side
+const withAuth = (WrappedComponent) => {
+    const AuthenticatedComponent = (props) => {
+        const [isClient, setIsClient] = useState(false); // To track if it's on client-side
 
         useEffect(() => {
             // Mark as client-side once component is mounted
@@ -31,7 +26,7 @@ const withAuth = <P extends object>(WrappedComponent: ComponentType<P>) => {
             return null; // If not authenticated after client check
         }
 
-        return <WrappedComponent {...(props as P)} />;
+        return <WrappedComponent {...props} />;
     };
 
     // Set the display name for better debugging

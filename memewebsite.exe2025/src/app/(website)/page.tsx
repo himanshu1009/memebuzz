@@ -2,7 +2,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Leaderboard from '../../components/Leaderboard';
-import LeaderPageMobile from '../../components/LeaderPageMobile';
 import CustomSidebar from '@/components/SideBar';
 import MemeSection from '../../components/MemeSection';
 import { useIsMobile } from '@/hooks/use-mobile';
