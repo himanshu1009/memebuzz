@@ -70,9 +70,13 @@ function MemeSection({ showmeme, memes, user, handleUpvote,handleComment }) {
           <div className="flex justify-start mt-8">
             <div className="md:w-1/6 w-1/2 flex flex-col justify-between md:justify-start items-center">
               {!meme.Upvotes.includes(user) ? (
-                <Upvoteicon onClick={() => handleUpvote(meme._id, false)} style={{ fill: "white", cursor: "pointer", width: 30, height: 30 }} />
+                <Upvoteicon onClick={() => {handleUpvote(meme._id, false)
+                  meme.Upvotes.push(user)}
+                } style={{ fill: "white", cursor: "pointer", width: 30, height: 30 }} />
               ) : (
-                <Upvotedicon onClick={() => handleUpvote(meme._id, true)} style={{ fill: "#c084fc", cursor: "pointer", width: 30, height: 30 }} />
+                <Upvotedicon onClick={() => { handleUpvote(meme._id, true)
+                  meme.Upvotes.pop(user) }
+                } style={{ fill: "#c084fc", cursor: "pointer", width: 30, height: 30 }} />
               )}
               <span className="text-white text-xs mt-2">{meme.Upvotes.length} {meme.Upvotes.length === 1 ? "Upvote" : "Upvotes"}</span>
             </div>

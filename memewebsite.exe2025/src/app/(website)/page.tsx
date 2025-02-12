@@ -118,8 +118,8 @@ export default function Page() {
           <div className="bg-black flex justify-between text-white mx-2 md:mx-4 py-2 lg:mx-16"> 
     
           <Image src="/exe.png" alt="logo" width={25} height={25} />
-          <h1 className="text-2xl text-center justify-center  font-bold">MemeWebsite</h1>
-          <Image src="/exe.png" alt="logo" width={25} height={25} />
+          <h1 className="text-2xl text-center justify-center  text-purple-400   font-extrabold">MemeBuzz</h1>
+          <div/>
             </div>
           </div>
           }

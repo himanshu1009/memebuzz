@@ -80,15 +80,15 @@ function ProfilePage({}) {
     <div className="flex  min-h-screen bg-black">
       {!isMobile && <CustomSidebar />}
       <div className="flex flex-col mx-auto md:mr-0 min-[1400px]:m-auto items-center   lg:mx-auto  justify-center p-4">
-        <div className="border border-gray-800 backdrop-blur-lg p-8 rounded-lg shadow-lg w-full max-w-md">
+        <div className=" backdrop-blur-lg p-8 rounded-lg shadow-lg w-full max-w-md">
           <div className="text-center border-b border-gray-300 pb-5 mb-5">
             <div className="flex flex-col items-center">
               {profile.avatar ? (
                 <img src={profile.avatar} alt="Profile" className="w-24 h-24 rounded-full mb-3" />
               ) : (
-                <div className="w-24 h-24 rounded-full mb-3 bg-gray-300"></div>
+                <div className="w-32 h-32 rounded-full mb-3 bg-gray-300"></div>
               )}
-              <h2 className="text-2xl font-bold text-white">{profile.name}</h2>
+              <h2 className="text-2xl font-sans text-white">{profile.name}</h2>
 
             </div>
             <div className="flex justify-center gap-4 mt-4">
@@ -101,7 +101,7 @@ function ProfilePage({}) {
             }} /></div>} 
           </div>
         </div>
-        <span className="text-white text-2xl my-5">Posts</span>
+        <span className="text-white text-3xl my-5">Posts</span>
         <div className="grid gap-3  grid-cols-2 lg:grid-cols-3 grid-flow-row overflow-y-auto p-4 justify-self-stretch items-start">
           {profile.posts && profile.posts.map(post => (
             <div
