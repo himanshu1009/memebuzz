@@ -6,7 +6,7 @@ import toast, { Toaster } from 'react-hot-toast'
 import CustomSidebar from '@/components/SideBar';
 import BottomBar from '@/components/BottomBar';
 import { useIsMobile } from '@/hooks/use-mobile';
-import LeaderboardMobile from '@/components/LeaderPageMobile';
+
 
 
 function create({}) {
