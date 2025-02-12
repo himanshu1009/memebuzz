@@ -1,4 +1,6 @@
+
 'use client'
+
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Leaderboard from '../../components/Leaderboard';
@@ -13,7 +15,13 @@ import LeaderboardMobile from '@/components/LeaderPageMobile';
 
 
 export default function Page() {
-  const [memes, setMemes] = useState([]);
+  interface Meme {
+    _id: string;
+    Upvotes: string[];
+    // Add other properties of Meme if needed
+  }
+
+  const [memes, setMemes] = useState<Meme[]>([]);
   const [User, setUser] = useState<string | null>(null);
   const [leaders, setLeaders] = useState([]);
   const isMobile = useIsMobile();
@@ -100,6 +108,17 @@ export default function Page() {
   }
 
   const handleUpvote = (id: string, upvoted: boolean, callback: UpvoteCallback = () => { }) => {
+    setMemes( memes.map((meme) => {
+      if (meme._id === id) {
+        if (User&&!meme.Upvotes.includes(User)) {
+          meme.Upvotes.push(User);
+        }
+        else if(User && meme.Upvotes.includes(User)){
+          meme.Upvotes=meme.Upvotes.filter((upvoter)=>upvoter!==User)
+        }
+      }
+      return meme
+    }));
     axios.post(`${process.env.NEXT_PUBLIC_API_URL}/post/upvote/${id}`, {}, {
       headers: headers
     }).then(() => {
