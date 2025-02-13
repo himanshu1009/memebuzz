@@ -144,7 +144,7 @@ function SignUpPage() {
                 />
               </div>
               <div className="mb-4">
-                <label className="block text-gray-300">Password</label>
+                <label className="block text-gray-300">Create Your Password</label>
                 <div className='flex gap-1'>
 
                   <input

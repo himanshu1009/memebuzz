@@ -13,7 +13,6 @@ import MemeByID from '@/components/MemeById';
 import Image from 'next/image';
 import LeaderboardMobile from '@/components/LeaderPageMobile';
 
-
 export default function Page() {
   interface Meme {
     _id: string;
@@ -29,6 +28,7 @@ export default function Page() {
   const [showLeaderboard, setShowLeaderboard] = useState(false);
   const [showMeme, setShowMeme] = useState(false);
   const [memeId, setMemeId] = useState('');
+  const [loadingmorememes, setLoadingmorememes] = useState(false);
 
   console.log(isMobile);
 
@@ -63,7 +63,7 @@ export default function Page() {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/post/get`);
+      const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/post/get?limit=10&page=1`);
       setMemes(response.data.data);
       console.log(response.data.data);
 
@@ -100,6 +100,23 @@ export default function Page() {
     setMemeId(id);
     setShowMeme(true);
     console.log('Meme ID:', id);
+  }
+  const handleLoadmore = async () => {
+    try {
+      setLoadingmorememes(true);
+      const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/post/get?limit=10&page=${memes.length / 10 + 1}`);
+      if (response.data.data.length === 0) {
+        toast.success('No more memes to show');
+        setLoadingmorememes(false);
+        return;
+      }
+      setMemes([...memes, ...response.data.data]);
+      console.log(response.data.data);
+      setLoadingmorememes(false);
+
+    } catch (error) {
+      console.log('Error fetching memes:', error);
+    }
   }
 
 
@@ -145,8 +162,9 @@ export default function Page() {
       {!isMobile && <CustomSidebar />}
       <div className="flex-1 mt-9 flex flex-col">
       
-        <div className={`flex-1 p-4 ${showMeme ? 'hidden' : ''}`}> 
+        <div className={`flex flex-col justify-center p-4 ${showMeme ? 'hidden' : ''}`}> 
           <MemeSection showmeme={showMeme} memes={memes} user={User} handleUpvote={handleUpvote}  handleComment={handleCommentSubmit}  />
+          {memes.length !== 0 && <button onClick={handleLoadmore} disabled={loadingmorememes} className="bg-purple-400 px-auto  mb-16 text-white p-2 rounded-md">{loadingmorememes?"Loading Memes":"Load More"}</button>}
         </div>
         <div className={`flex-1 p-4 ${!showMeme ? 'hidden' : ''}`}> 
         {<MemeByID isopen={showMeme} key={memeId} memeId={memeId} user={User} handleComment={handleCommentSubmit} handleUpvote={handleUpvote} onclose={()=>setShowMeme(false)}/>}
