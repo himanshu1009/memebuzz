@@ -32,8 +32,22 @@ function SignUpPage() {
       });
       console.log('User registered successfully:', response.data);
       toast.success('User registered successfully');
-      // Redirect to the sign-in page
-      router.push('/sign-in');
+      await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/auth/signin`, {
+        email: email.toLowerCase(),
+        password,
+      }).then((response) => {
+        toast.success('User signed in successfully');
+        console.log('User signed in successfully:', response.data);
+        // Save the token in localStorage or cookies
+        localStorage.setItem('token', response.data.data.token);
+        localStorage.setItem('user', (response.data.data.user._id));
+        router.push('/');
+  
+      }).catch((error) => {
+        console.log('Error signing in user:', error);
+        toast.error(error?.response?.data?.error?.explanation || error?.response?.data?.error || 'An error occurred');
+  
+      });
     } catch (error) {
       console.log('Error verifying OTP:', error);
       setError(error.response.data.message);
