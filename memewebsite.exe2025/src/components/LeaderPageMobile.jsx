@@ -49,11 +49,6 @@ export default function LeaderboardMobile({ leaders, handleOnClick ,onclose}) {
           </li>
         ))}
       </ul>
-      {isMobile && (
-        <>
-          <BottomBar showLeaderboard={showLeaderboard} setShowLeaderboard={setShowLeaderboard} />
-        </>
-      )}
     </div>
   );
 }
