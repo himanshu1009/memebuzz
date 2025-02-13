@@ -3,33 +3,29 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
-import CustomSidebar from '@/components/SideBar';
 import toast from 'react-hot-toast';
 import Image from 'next/image';
 import { useIsMobile } from '@/hooks/use-mobile';
-import { Eye, EyeOff } from "lucide-react"; // Icons for show/hide
+import { sub } from 'date-fns';
+
 
 function SignInPage() {
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const router = useRouter();
   const isMobile = useIsMobile();
-  const [showPassword, setShowPassword] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  
 
   const handleSubmit = async (e) => {
+    setSubmitting(true);
     e.preventDefault();
 
-    await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/auth/signin`, {
-      email: email.toLowerCase(),
-      password,
+    await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/auth/forgot-password`, {
+      email: email.toLowerCase()
     }).then((response) => {
-      toast.success('User signed in successfully');
-      console.log('User signed in successfully:', response.data);
-      // Save the token in localStorage or cookies
-      localStorage.setItem('token', response.data.data.token);
-      localStorage.setItem('user', (response.data.data.user._id));
-      router.push('/');
+      toast.success('OTP sent successfully');
+      window.location.href = `/reset-password?email=${email}`;
 
     }).catch((error) => {
       console.log('Error signing in user:', error);
@@ -55,7 +51,7 @@ function SignInPage() {
         {/* <CustomSidebar /> */}
         <div className="flex-1 flex items-center justify-center min-h-screen bg-black">
           <div className="bg-white bg-opacity-10 backdrop-blur-lg p-8 rounded-lg shadow-lg w-full max-w-md">
-            <h1 className="text-2xl font-bold mb-4 text-center text-white">Sign In</h1>
+            <h1 className="text-2xl font-bold mb-4 text-center text-white">Reset Password</h1>
             {error && <p className="text-red-500">{error}</p>}
             <form onSubmit={handleSubmit}>
               <div className="mb-4">
@@ -67,35 +63,14 @@ function SignInPage() {
                   className="w-full p-2 border border-gray-300 rounded-lg bg-white bg-opacity-20 text-white"
                 />
               </div>
-              <div className="mb-4">
-                <label className="block text-gray-300">Password</label>
-                <div className='flex gap-1'>
-                  <input
-                    type={showPassword ? "text" : "password"}
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    className="w-full p-2 border border-gray-300 rounded-lg bg-white bg-opacity-20 text-white"
-                  />
-                  <button
-                    type="button"
-                    onClick={() => setShowPassword(!showPassword)}
-                    className=" text-white"
-                  >
-                    {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
-                  </button>
-
-                </div>
-              </div>
+              
               <button
                 type="submit"
                 className="w-full mt-5 p-2 rounded-lg bg-gradient-to-r from-purple-500 to-purple-700 text-white hover:from-purple-400 hover:to-purple-600"
               >
-                Sign In
+                {submitting ? 'Sending OTP...' : 'Reset Password'}
               </button>
             </form>
-            <div className="text-center mt-4 flex items-center justify-center">
-              <a href="/forget-pass" className="text-purple-500 hover:text-purple-300  hover:cursor-pointer">Forgot password?</a>
-            </div>
 
             <hr className="my-4 border-gray-300" />
             <div className="text-center mt-4 flex items-center justify-center">
