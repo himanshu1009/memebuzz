@@ -180,7 +180,7 @@ export default function Page() {
             <select
               value={sort}
               onChange={handlechangefilter}
-              className="bg-purple-400 text-white p-2 rounded-md mb-4 w-1/6 mx-auto"
+              className="bg-purple-400 text-white p-2 rounded-md mb-4 w-1/4 md:w-1/6 mx-auto"
             >
               <option value="new">New</option>
               <option value="hot">Hot</option>
