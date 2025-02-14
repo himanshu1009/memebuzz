@@ -145,7 +145,7 @@ export default function Page() {
       headers: headers
     }).then(() => {
       fetchDataLeader();
-      fetchData();
+      handleLoadmore();
       callback();
     }).catch((error) => {
       toast.success(error.response.data.error);
